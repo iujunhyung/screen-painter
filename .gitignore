@@ -1,0 +1,7 @@
+# Visual Studio files
+.vs/
+*.user
+
+# Build artifacts
+bin/
+obj/

@@ -1,0 +1,12 @@
+﻿<Window x:Class="ScreenDrawing.DrawWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Drawing Program" Height="1" Width="1"
+        AllowsTransparency="True" WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush Opacity="0.1" Color="White" />
+    </Window.Background>
+    <Grid>
+        <Canvas x:Name="canvas" Background="White" Opacity="0.1" MouseDown="canvas_MouseDown" MouseMove="canvas_MouseMove" MouseUp="canvas_MouseUp"/>
+    </Grid>
+</Window>
