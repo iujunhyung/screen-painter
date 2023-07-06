@@ -1,59 +1,47 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace ScreenDrawing
 {
 	public partial class DrawWindow : Window
 	{
-		private bool isDrawing;
-		private Point startPoint;
-
 		public DrawWindow()
 		{
 			InitializeComponent();
 		}
 
-		private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
+		private void Move_Down(object sender, MouseButtonEventArgs e)
 		{
-			isDrawing = true;
-			startPoint = e.GetPosition(canvas);
+			DragMove();
+			e.Handled = true;
 		}
 
-		private void canvas_MouseMove(object sender, MouseEventArgs e)
+		private void Mode_Click(object sender, RoutedEventArgs e)
 		{
-			if (isDrawing)
-			{
-				Line line = new Line
-				{
-					Stroke = Brushes.Red,
-					StrokeThickness = 2,
-					Opacity = 1,
-					X1 = startPoint.X,
-					Y1 = startPoint.Y,
-					X2 = e.GetPosition(canvas).X,
-					Y2 = e.GetPosition(canvas).Y
-				};
+			MainMenu.Visibility = Visibility.Hidden;
+			BackCanvas.Color = Colors.White;
+			WindowState = WindowState.Maximized;
+		}
 
-				startPoint = e.GetPosition(canvas);
-				canvas.Children.Add(line);
+		private void KeyDown_Event(object sender, KeyEventArgs e)
+		{
+			if(e.Key == Key.Escape)
+			{
+				MainMenu.Visibility = Visibility.Visible;
+				BackCanvas.Color = Colors.Transparent;
+				WindowState = WindowState.Normal;
 			}
 		}
 
-		private void canvas_MouseUp(object sender, MouseButtonEventArgs e)
+		private void ChangePenColor_Click(object sender, RoutedEventArgs e)
 		{
-			isDrawing = false;
+			MainCanvas.DefaultDrawingAttributes.Color = Color.FromRgb(255, 0, 0);
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void Erase_Click(object sender, RoutedEventArgs e)
 		{
-			canvas.Children.Clear();
-		}
-
-		public void ClearCanvas()
-		{
-			canvas.Children.Clear();
+			MainCanvas.Strokes.Clear();
 		}
 	}
 }
